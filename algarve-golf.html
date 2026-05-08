@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Algarve Golf Trip — Oct 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --sand:#f5efe6;--dark:#1a1208;--green:#2d5016;--gl:#4a7c2a;
+    --gold:#c9a84c;--rust:#c4622d;--cream:#fdf8f0;--muted:#7a6e5f;
+  }
+  body{background:var(--sand);color:var(--dark);font-family:'Cormorant Garamond',Georgia,serif;font-size:16px;}
+
+  /* ── HERO ── */
+  .hero{background:var(--green);color:var(--sand);padding:44px 40px 32px;position:relative;overflow:hidden;}
+  .hero::before{content:'';position:absolute;top:-60px;right:-60px;width:260px;height:260px;border-radius:50%;background:rgba(201,168,76,.1);}
+  .flag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:10px;}
+  .hero h1{font-size:clamp(34px,5.5vw,60px);font-weight:300;line-height:1.05;letter-spacing:-1px;}
+  .hero h1 em{font-style:italic;color:var(--gold);}
+  .hmeta{display:flex;gap:24px;margin-top:16px;flex-wrap:wrap;}
+  .hmi{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;color:rgba(245,239,230,.6);text-transform:uppercase;}
+  .hmi span{color:var(--sand);}
+  .wstrip{background:var(--gold);padding:10px 40px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1px;color:var(--dark);}
+
+  /* ── LAYOUT ── */
+  .main{padding:0 24px 60px;max-width:960px;margin:0 auto;}
+  .slabel{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--muted);margin:36px 0 14px;display:flex;align-items:center;gap:12px;}
+  .slabel::after{content:'';flex:1;height:1px;background:rgba(26,18,8,.12);}
+
+  /* ── TABS ── */
+  .nav{display:flex;border-bottom:2px solid rgba(26,18,8,.1);margin-top:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .ntab{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:10px 14px;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-2px;white-space:nowrap;transition:all .2s;flex-shrink:0;}
+  .ntab.active{color:var(--green);border-bottom-color:var(--green);}
+  .tc{display:none;} .tc.active{display:block;}
+
+  /* ── COURSE CARDS ── */
+  .course-card{background:var(--cream);border-radius:6px;overflow:hidden;margin-bottom:20px;border:1px solid rgba(26,18,8,.08);box-shadow:0 2px 12px rgba(26,18,8,.04);}
+  .course-header{display:flex;align-items:stretch;}
+  .course-day-tab{background:var(--green);color:var(--sand);padding:16px 18px;min-width:90px;text-align:center;flex-shrink:0;display:flex;flex-direction:column;justify-content:center;}
+  .cdn{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:rgba(245,239,230,.55);margin-bottom:4px;}
+  .cdd{font-size:19px;font-weight:300;color:var(--gold);}
+  .course-hero-img{width:180px;flex-shrink:0;overflow:hidden;position:relative;}
+  .course-hero-img img{width:100%;height:100%;object-fit:cover;}
+  .course-info{flex:1;padding:16px 18px;display:flex;flex-direction:column;gap:6px;}
+  .course-badge-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:2px;}
+  .cbadge{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1.5px;text-transform:uppercase;padding:3px 8px;border-radius:2px;border:1px solid currentColor;}
+  .cb-prem{color:var(--gl);} .cb-relax{color:var(--rust);} .cb-gold{color:var(--gold);}
+  .course-name{font-size:21px;font-weight:600;line-height:1.15;}
+  .course-arch{font-size:12px;font-style:italic;color:var(--muted);}
+  .course-stats{display:flex;gap:16px;flex-wrap:wrap;margin-top:4px;}
+  .stat{text-align:center;}
+  .stat-val{font-family:'DM Mono',monospace;font-size:16px;font-weight:400;color:var(--green);}
+  .stat-lbl{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--muted);text-transform:uppercase;margin-top:1px;}
+  .stars{color:var(--gold);font-size:13px;letter-spacing:1px;}
+  .course-body{border-top:1px solid rgba(26,18,8,.07);padding:16px 18px;display:grid;grid-template-columns:1fr 1fr;gap:16px;} .photo-gallery{grid-column:1/-1;}
+  .course-desc-full{font-size:14px;line-height:1.7;color:#3a3020;}
+  .course-right{}
+  .sig-hole{background:rgba(45,80,22,.07);border-left:3px solid var(--green);border-radius:0 4px 4px 0;padding:12px 14px;margin-bottom:12px;}
+  .sig-lbl{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--green);text-transform:uppercase;margin-bottom:5px;}
+  .sig-title{font-size:15px;font-weight:600;margin-bottom:3px;}
+  .sig-desc{font-size:13px;color:var(--muted);line-height:1.5;}
+  .scorecard-mini{width:100%;border-collapse:collapse;font-size:11px;margin-top:8px;}
+  .scorecard-mini th{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);text-align:center;padding:4px 6px;border-bottom:1px solid rgba(26,18,8,.1);}
+  .scorecard-mini td{text-align:center;padding:3px 6px;border-bottom:1px solid rgba(26,18,8,.05);font-family:'DM Mono',monospace;font-size:10px;}
+  .scorecard-mini tr:last-child td{border-bottom:none;}
+  .sc-par{background:rgba(45,80,22,.06);font-weight:700;}
+  .ch-strip{background:rgba(201,168,76,.1);border-top:1px solid rgba(201,168,76,.2);padding:10px 18px;display:flex;align-items:flex-start;gap:10px;}
+  .ch-strip-icon{font-size:16px;flex-shrink:0;margin-top:1px;}
+  .ch-strip-content{}
+  .ch-strip-lbl{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:3px;}
+  .ch-strip-text{font-size:13px;color:#3a3020;line-height:1.5;}
+
+  /* ── ITINERARY DAY CARDS ── */
+  .dc{background:var(--cream);border-radius:4px;overflow:hidden;margin-bottom:14px;border:1px solid rgba(26,18,8,.08);}
+  .dh{display:flex;align-items:stretch;cursor:pointer;user-select:none;}
+  .dtab{background:var(--green);color:var(--sand);padding:14px 18px;min-width:100px;text-align:center;flex-shrink:0;display:flex;flex-direction:column;justify-content:center;}
+  .dname{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:rgba(245,239,230,.6);margin-bottom:4px;}
+  .ddate{font-size:20px;font-weight:300;color:var(--gold);}
+  .dta{flex:1;padding:12px 18px;}
+  .dtitle{font-size:17px;font-weight:300;}
+  .dsub{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;margin-top:3px;}
+  .dtog{padding:0 18px;font-size:18px;color:var(--muted);transition:transform .3s;flex-shrink:0;display:flex;align-items:center;}
+  .dtog.open{transform:rotate(180deg);}
+  .db{display:none;border-top:1px solid rgba(26,18,8,.08);padding:20px;}
+  .db.open{display:block;}
+  .rnd{display:grid;grid-template-columns:3px 1fr;gap:0 15px;margin-bottom:18px;}
+  .rs{background:var(--gl);border-radius:2px;} .rs.relax{background:var(--rust);}
+  .rt{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--gold);margin-bottom:3px;}
+  .rn{font-size:19px;font-weight:600;margin-bottom:1px;}
+  .ra{font-size:12px;font-style:italic;color:var(--muted);margin-bottom:6px;}
+  .rd{font-size:14px;line-height:1.6;color:#3a3020;}
+  .brow{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px;}
+  .b{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1.5px;text-transform:uppercase;padding:3px 9px;border-radius:2px;border:1px solid currentColor;}
+  .bg{color:var(--gl);} .bo{color:var(--gold);} .br{color:var(--rust);}
+  .ch{background:rgba(45,80,22,.07);border-left:3px solid var(--green);border-radius:0 3px 3px 0;padding:10px 14px;margin:8px 0 18px;}
+  .chl{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--green);text-transform:uppercase;margin-bottom:4px;}
+  .chd{font-size:13px;color:#3a3020;line-height:1.5;}
+  .dot{text-align:center;color:var(--muted);font-size:16px;margin:2px 0 18px;opacity:.4;}
+  .eve{background:var(--dark);color:var(--sand);border-radius:3px;padding:16px;margin-top:4px;}
+  .evel{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:7px;}
+  .even{font-size:16px;font-weight:300;margin-bottom:3px;}
+  .eved{font-size:13px;color:rgba(245,239,230,.65);line-height:1.55;}
+
+  /* ── GRIDS ── */
+  .g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+  .ic{background:var(--cream);border:1px solid rgba(26,18,8,.08);border-radius:4px;padding:15px;}
+  .it{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:5px;}
+  .in{font-size:16px;font-weight:600;margin-bottom:3px;line-height:1.2;}
+  .id{font-size:13px;color:var(--muted);line-height:1.5;}
+
+  /* ── VILLA ── */
+  .vc{background:var(--dark);color:var(--sand);border-radius:4px;padding:24px;margin-bottom:14px;}
+  .vt{font-size:24px;font-weight:300;margin-bottom:3px;}
+  .vs{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:14px;}
+  .vf{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;}
+  .vfi{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1.5px;text-transform:uppercase;padding:4px 10px;border:1px solid rgba(201,168,76,.35);border-radius:2px;color:rgba(245,239,230,.75);}
+  .vfi.hi{border-color:var(--gold);color:var(--gold);}
+  .vd{font-size:14px;line-height:1.65;color:rgba(245,239,230,.72);}
+  .vp{margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;}
+  .vpv{font-size:20px;font-weight:300;color:var(--gold);}
+  .vpn{font-family:'DM Mono',monospace;font-size:10px;color:rgba(245,239,230,.45);letter-spacing:1px;}
+
+  /* ── TABLE ── */
+  .tbl{width:100%;border-collapse:collapse;font-size:13px;}
+  .tbl th{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);text-align:left;padding:8px 12px;border-bottom:1px solid rgba(26,18,8,.12);}
+  .tbl td{padding:9px 12px;border-bottom:1px solid rgba(26,18,8,.06);vertical-align:top;}
+  .tbl tr:last-child td{border-bottom:none;}
+  .tp{color:var(--green);font-weight:600;} .tr{color:var(--rust);font-weight:600;}
+
+  /* ── TRAVEL ── */
+  .ts{background:var(--dark);color:var(--sand);border-radius:4px;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;}
+  .ti{text-align:center;}
+  .til{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,239,230,.45);margin-bottom:3px;}
+  .tiv{font-size:17px;font-weight:300;color:var(--gold);}
+  .tis{font-size:11px;color:rgba(245,239,230,.55);margin-top:2px;}
+  .ta{font-size:24px;color:rgba(245,239,230,.15);}
+
+  /* ── GROUP PILLS ── */
+  .gpill{display:inline-flex;align-items:center;gap:7px;background:rgba(45,80,22,.08);border:1px solid rgba(45,80,22,.15);border-radius:20px;padding:5px 12px;font-size:12px;margin:3px;}
+  .gpn{font-weight:600;} .gpf{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:1px;}
+
+  /* ── ALERT ── */
+  .alert{background:rgba(196,98,45,.08);border-left:3px solid var(--rust);border-radius:0 3px 3px 0;padding:10px 14px;margin-bottom:14px;}
+  .alert-l{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--rust);text-transform:uppercase;margin-bottom:4px;}
+  .alert-d{font-size:13px;color:#3a3020;line-height:1.5;}
+
+  /* ── MAP NOTE ── */
+  .map-note{background:var(--cream);border:1px solid rgba(26,18,8,.08);border-radius:4px;padding:14px 18px;margin-bottom:20px;font-size:13px;color:var(--muted);display:flex;align-items:center;gap:10px;}
+
+
+
+  .course-links { display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+  .clink { display:inline-flex; align-items:center; gap:5px; font-family:'DM Mono',monospace; font-size:8px; letter-spacing:1.5px; text-transform:uppercase; padding:5px 10px; border-radius:2px; text-decoration:none; transition:all .15s; }
+  .clink-official { background:var(--green); color:var(--sand); }
+  .clink-official:hover { background:#1e3a0a; }
+  .clink-book { background:var(--gold); color:var(--dark); }
+  .clink-book:hover { background:#b8902e; }
+  .clink-villa { background:var(--dark); color:var(--gold); border:1px solid rgba(201,168,76,.3); }
+  .clink-villa:hover { background:#2a1e0a; }
+
+  .photo-gallery { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:0 0 14px 0; grid-column:1/-1; }
+  .photo-gallery img { width:100%; height:160px; object-fit:cover; border-radius:3px; display:block; }
+  .photo-gallery.single img { height:220px; }
+  .photo-caption { font-family:'DM Mono',monospace; font-size:8px; letter-spacing:1.5px; color:var(--muted); text-transform:uppercase; margin-top:4px; text-align:center; }
+  .villa-photos { display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin:14px 0; }
+  .villa-photos img { width:100%; height:130px; object-fit:cover; border-radius:3px; border:1px solid rgba(255,255,255,.1); }
+  @media(max-width:600px){ .photo-gallery, .villa-photos { grid-template-columns:1fr 1fr; } }
+  .lc-rating { color: var(--green) !important; font-size: 18px !important; font-weight: 600; }
+  .arch-pill { display: inline-block; background: rgba(45,80,22,.09); border: 1px solid rgba(45,80,22,.2); border-radius: 3px; padding: 1px 7px; font-size: 11px; font-family: 'DM Mono', monospace; color: var(--green); font-style: normal; letter-spacing: 0.5px; margin: 1px 2px; }
+  @media(max-width:680px){
+    .g2,.g3{grid-template-columns:1fr;}
+    .hero{padding:32px 20px 24px;} .main{padding:0 14px 50px;} .wstrip{padding:10px 20px;}
+    .course-body{grid-template-columns:1fr;}
+    .course-hero-img{display:none;}
+    .ts{flex-direction:column;text-align:center;} .ta{display:none;}
+    .course-stats{gap:10px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="flag">🇵🇹 Algarve Golf Trip · v4 · Eddy, Sascha + 2 · Oct 2026</div>
+  <h1>Algarve<br><em>Golden Triangle</em></h1>
+  <div class="hmeta">
+    <div class="hmi">Dates <span>9–12 Oct 2026</span></div>
+    <div class="hmi">Base <span>Almancil</span></div>
+    <div class="hmi">Group <span>4 people</span></div>
+    <div class="hmi">Rounds <span>5 days · 2/day (full days)</span></div>
+    <div class="hmi">Budget <span>≤ €2,000pp</span></div>
+  </div>
+</div>
+
+<div class="wstrip">☀️ &nbsp;October Algarve: 22–25°C · ~8hrs sunshine · Low crowds · Green fees 15–20% cheaper than peak season</div>
+
+<div class="main">
+  <div class="nav">
+    <div class="ntab active" onclick="showTab('map',this)">🗺 Map</div>
+    <div class="ntab" onclick="showTab('courses',this)">⛳ Courses</div>
+    <div class="ntab" onclick="showTab('itin',this)">📅 Itinerary</div>
+    <div class="ntab" onclick="showTab('villa',this)">🏠 Villa</div>
+    <div class="ntab" onclick="showTab('food',this)">🍷 Food</div>
+    <div class="ntab" onclick="showTab('costs',this)">💶 Costs</div>
+  </div>
+
+  <!-- ═══ MAP ═══ -->
+  <div id="map" class="tc active">
+    <div class="slabel">Interactive Map</div>
+    <div style="border-radius:4px;overflow:hidden;border:1px solid rgba(26,18,8,.1);margin-bottom:20px;">
+      <div id="trip-map" style="width:100%;height:480px;border-radius:4px;overflow:hidden;"></div>
+      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+      <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+      <script>
+        (function() {
+          var map = L.map('trip-map', { zoomControl: true }).setView([37.068, -8.055], 11);
+          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+            maxZoom: 18
+          }).addTo(map);
+
+          var locations = [
+            { lat: 37.0166, lng: -7.9706, label: '✈️ Faro Airport', color: '#c4622d', day: 'Arrival / Departure' },
+            { lat: 37.0877, lng: -8.0300, label: '🏠 Villa — Almancil', color: '#1a1208', day: 'Base (3 nights)' },
+            { lat: 37.0925, lng: -8.1110, label: '⛳ Dom Pedro Pinhal', color: '#c9a84c', day: 'Fri PM · Relaxed' },
+            { lat: 37.0458, lng: -8.0175, label: '⛳ Quinta do Lago South', color: '#2d5016', day: 'Sat AM · Premium' },
+            { lat: 37.0459, lng: -8.0176, label: '⛳ Quinta do Lago North', color: '#4a7c2a', day: 'Sat PM · Relaxed' },
+            { lat: 37.0557, lng: -8.0638, label: '⛳ Vale do Lobo Royal', color: '#2d5016', day: 'Sun AM · Premium' },
+            { lat: 37.0912, lng: -8.0937, label: '⛳ Vila Sol Golf', color: '#4a7c2a', day: 'Sun PM · Relaxed' },
+            { lat: 37.1021, lng: -8.1158, label: '⛳ Old Course Vilamoura', color: '#2d5016', day: 'Mon AM · Classic' }
+          ];
+
+          function makeIcon(color, emoji) {
+            return L.divIcon({
+              className: '',
+              html: '<div style="background:' + color + ';color:#fff;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-size:14px;box-shadow:0 2px 8px rgba(0,0,0,.35);border:2px solid rgba(255,255,255,.8);">' + emoji + '</div>',
+              iconSize: [34, 34],
+              iconAnchor: [17, 17],
+              popupAnchor: [0, -20]
+            });
+          }
+
+          var icons = {
+            '✈️': makeIcon('#c4622d', '✈'),
+            '🏠': makeIcon('#1a1208', '🏠'),
+            '⛳': makeIcon('#2d5016', '⛳')
+          };
+
+          locations.forEach(function(loc) {
+            var emoji = loc.label.split(' ')[0];
+            var icon = loc.label.includes('Villa') ? makeIcon('#1a1208','🏠')
+                     : loc.label.includes('Airport') ? makeIcon('#c4622d','✈')
+                     : loc.label.includes('South') || loc.label.includes('Royal') || loc.label.includes('Old') ? makeIcon('#2d5016','⛳')
+                     : makeIcon('#c9a84c','⛳');
+            L.marker([loc.lat, loc.lng], { icon: icon })
+              .addTo(map)
+              .bindPopup('<strong style="font-family:Georgia,serif;font-size:14px;">' + loc.label + '</strong><br><span style="font-family:monospace;font-size:11px;color:#7a6e5f;">' + loc.day + '</span>');
+          });
+
+          // Draw route line: FAO → Villa → courses in order
+          var routeCoords = [
+            [37.0166, -7.9706],
+            [37.0877, -8.0300],
+            [37.0925, -8.1110],
+            [37.0458, -8.0175],
+            [37.0557, -8.0638],
+            [37.0912, -8.0937],
+            [37.1021, -8.1158]
+          ];
+          L.polyline(routeCoords, { color: '#c9a84c', weight: 2, opacity: 0.5, dashArray: '6,6' }).addTo(map);
+        })();
+      </script>
+    </div>
+    <p style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;margin-bottom:24px;">✈️ Faro Airport → 🏠 Villa Almancil → ⛳ All 5 courses — everything within 25 min</p>
+
+    <div class="slabel">Driving Distances</div>
+    <div class="map-note">📍 Everything within 25 min of the villa. The Golden Triangle is one of the tightest clusters of top-tier golf in Europe — no long drives between rounds.</div>
+
+    <div class="dc" style="overflow:auto;">
+      <table class="tbl">
+        <thead><tr><th>From → To</th><th>Distance</th><th>Drive</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>✈️ Faro Airport → 🏠 Villa (Almancil)</td><td>~27 km</td><td><strong>~25 min</strong></td><td>Pick up rental car at FAO. Straight motorway.</td></tr>
+          <tr><td>🏠 Villa → ⛳ Dom Pedro Pinhal (Fri PM)</td><td>~15 km</td><td><strong>~12 min</strong></td><td>Easy drive west into Vilamoura.</td></tr>
+          <tr><td>🏠 Villa → ⛳ Quinta do Lago South (Sat AM)</td><td>~8 km</td><td><strong>~10 min</strong></td><td>Closest premium course to base.</td></tr>
+          <tr><td>⛳ QdL South → ⛳ QdL North (Sat PM)</td><td>~0 km</td><td><strong>0 min</strong></td><td>Same estate — walk or short buggy ride.</td></tr>
+          <tr><td>🏠 Villa → ⛳ Vale do Lobo Royal (Sun AM)</td><td>~12 km</td><td><strong>~14 min</strong></td><td>Easy coastal drive west.</td></tr>
+          <tr><td>⛳ VdL Royal → ⛳ Vila Sol (Sun PM)</td><td>~16 km</td><td><strong>~18 min</strong></td><td>Drive north-east back towards Vilamoura.</td></tr>
+          <tr><td>🏠 Villa → ⛳ Dom Pedro Old Course (Mon AM)</td><td>~18 km</td><td><strong>~15 min</strong></td><td>Into Vilamoura. Then 15 min to airport after.</td></tr>
+          <tr style="background:rgba(45,80,22,.04)"><td>⛳ Old Course → ✈️ Faro Airport (Mon PM)</td><td>~22 km</td><td><strong>~15 min</strong></td><td>Motorway direct. Plenty of time for 16:00+ flights.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="slabel">Key Contacts & Phone Numbers</div>
+    <div class="g2">
+      <div class="ic"><div class="it">Dom Pedro Pinhal</div><div class="in">+351 289 310 390</div><div class="id">vilamouragolf.com · Open 7:00–20:00 daily</div></div>
+      <div class="ic"><div class="it">Quinta do Lago (S + N)</div><div class="in">+351 289 390 700</div><div class="id">quintadolago.com · Open 7:00–20:30 daily</div></div>
+      <div class="ic"><div class="it">Vale do Lobo Royal</div><div class="in">valedolobo.com/golf</div><div class="id">Book online or call resort switchboard</div></div>
+      <div class="ic"><div class="it">Vila Sol Golf</div><div class="in">+351 289 320 370</div><div class="id">pestanagolf.com · Open 9:00–18:00 daily</div></div>
+      <div class="ic"><div class="it">Dom Pedro Old Course</div><div class="in">+351 289 310 341</div><div class="id">oldcoursevilamoura.com · Open 7:00–20:00 daily</div></div>
+      <div class="ic"><div class="it">Faro Airport</div><div class="in">+351 289 800 800</div><div class="id">aeroportofaro.pt · Car rental desks in arrivals</div></div>
+    </div>
+  </div>
+
+  <!-- ═══ COURSES ═══ -->
+  <div id="courses" class="tc">
+    <div class="slabel">Course Deep Dives — All 5 Rounds</div>
+
+    <!-- PINHAL -->
+    <div class="course-card">
+      <div class="course-header">
+        <div class="course-day-tab"><div class="cdn">Friday</div><div class="cdd">PM</div></div>
+        <div class="course-hero-img">
+          <img src="https://lh3.googleusercontent.com/places/ANXAkqHRS0D-5HXEBJ-Pn1glbuhrpMC05-DpRpQazyFTnwpJ1SlvB1kpXVvoFqylhl0pP9S-sgvxKVVmh4O-AGc_GY6QXkiwxRZIl5o=s4800-w800-h600" alt="Dom Pedro Pinhal" onerror="this.parentElement.style.display='none'">
+        </div>
+        <div class="course-info">
+          <div class="course-badge-row">
+            <span class="cbadge cb-relax">Relaxed</span>
+            <span class="cbadge cb-gold">Arrival Round</span>
+          </div>
+          <div class="course-name">Dom Pedro Pinhal</div>
+          <div class="course-arch"><span class="arch-pill">✏️ Frank Pennink</span> <span class="arch-pill">✏️ Robert Trent Jones Sr.</span> · Vilamoura · 1976/1985</div>
+        <div class="course-links">
+          <a href="https://www.vilamouragolf.com/en/golf-courses/pinhal/" target="_blank" rel="noopener" class="clink clink-official">🌐 Official Site</a>
+          <a href="https://www.leadingcourses.com/clubs/europe+portugal+algarve/pinhal-vilamoura" target="_blank" rel="noopener" class="clink clink-book">⛳ Tee Times · Leading Courses</a>
+        </div>
+          <div class="course-stats">
+            <div class="stat"><div class="stat-val">72</div><div class="stat-lbl">Par</div></div>
+            <div class="stat"><div class="stat-val">6,353m</div><div class="stat-lbl">Length</div></div>
+            <div class="stat"><div class="stat-val">74.0</div><div class="stat-lbl">CR</div></div>
+            <div class="stat"><div class="stat-val">140</div><div class="stat-lbl">Slope</div></div>
+            <div class="stat"><div class="stat-val lc-rating">7.8<span style="font-size:10px">/10</span></div><div class="stat-lbl">Leading Courses</div></div>
+            <div class="stat"><div class="stat-val">~12 min</div><div class="stat-lbl">From Villa</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="course-body">
+        <div class="course-desc-full">
+          The second course built in Vilamoura, Pinhal weaves through dense umbrella and Atlantic pine forest in a rolling parkland setting. A handful of ponds and a stream come into play on five holes but rarely threaten above-average golfers — the real challenge is the tree-lined accuracy test throughout. The clubhouse was fully renovated at the turn of the millennium and the panoramic verandah terrace overlooking the driving range is one of the better post-round spots in Vilamoura. GPS on buggies, good halfhouse stop. The ideal legs-off-the-plane opener.
+        </div>
+        <div class="course-right">
+          <div class="sig-hole">
+            <div class="sig-lbl">⭐ Signature Hole</div>
+            <div class="sig-title">Hole 8 — Par 3 · 149m</div>
+            <div class="sig-desc">Short but trickier than it looks. Tree-lined approach, well-bunkered green. A sneaky bogey hole on an otherwise generous course.</div>
+          </div>
+          <div class="sig-hole">
+            <div class="sig-lbl">Watch Out</div>
+            <div class="sig-title">Hole 4 — Par 4 · Water</div>
+            <div class="sig-desc">The par-4 4th is tricky with water waiting for the erring shot off the tee. Only water hazard that really bites.</div>
+          </div>
+          <table class="scorecard-mini">
+            <tr><th>Hole</th><th>1–9</th><th>10–18</th><th>Total</th></tr>
+            <tr><td>Par</td><td>36</td><td>36</td><td class="sc-par">72</td></tr>
+            <tr><td>Length (m)</td><td>3,004</td><td>3,349</td><td class="sc-par">6,353</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="ch-strip">
+        <div class="ch-strip-icon">🍺</div>
+        <div class="ch-strip-content">
+          <div class="ch-strip-lbl">Clubhouse — Pinhal</div>
+          <div class="ch-strip-text">Renovated terrace bar with panoramic views over the driving range. Cold beers, toasties, sandwiches. GPS buggies on course. Good halfway stop at 9th. Solid for a Friday evening wind-down — nothing fancy, everything you need.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QdL SOUTH -->
+    <div class="course-card">
+      <div class="course-header">
+        <div class="course-day-tab" style="background:#1e3a0a;"><div class="cdn">Saturday</div><div class="cdd">AM</div></div>
+        <div class="course-hero-img">
+          <img src="https://lh3.googleusercontent.com/places/ANXAkqH2trkpunGZvpfU2kHkBQ1IJ7qS5O2K3ojHeOWhzRP7VXpbLC_VyHbYtph22En_-fPZjy22AxNeJOl4fO66ceXlaeDhzIXka9U=s4800-w800-h600" alt="Quinta do Lago South" onerror="this.parentElement.style.display='none'">
+        </div>
+        <div class="course-info">
+          <div class="course-badge-row">
+            <span class="cbadge cb-prem">Premium</span>
+            <span class="cbadge cb-gold">Championship</span>
+            <span class="cbadge cb-gold">🇵🇹 Portuguese Open ×8</span>
+          </div>
+          <div class="course-name">Quinta do Lago South</div>
+          <div class="course-arch"><span class="arch-pill">✏️ William Mitchell</span> · 1974 · Bermuda / Bentgrass</div>
+        <div class="course-links">
+          <a href="https://www.quintadolago.com/en/golf/golf-courses-south/" target="_blank" rel="noopener" class="clink clink-official">🌐 Official Site</a>
+          <a href="https://www.leadingcourses.com/clubs/europe+portugal+algarve/quinta-do-lago" target="_blank" rel="noopener" class="clink clink-book">⛳ Tee Times · Leading Courses</a>
+        </div>
+          <div class="course-stats">
+            <div class="stat"><div class="stat-val">72</div><div class="stat-lbl">Par</div></div>
+            <div class="stat"><div class="stat-val">6,488m</div><div class="stat-lbl">Length</div></div>
+            <div class="stat"><div class="stat-val">73.5</div><div class="stat-lbl">CR</div></div>
+            <div class="stat"><div class="stat-val">127</div><div class="stat-lbl">Slope</div></div>
+            <div class="stat"><div class="stat-val lc-rating">8.6<span style="font-size:10px">/10</span></div><div class="stat-lbl">Leading Courses</div></div>
+            <div class="stat"><div class="stat-val">~10 min</div><div class="stat-lbl">From Villa</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="course-body">
+        <div class="photo-gallery">
+          <div><img src="https://lh3.googleusercontent.com/places/ANXAkqH2trkpunGZvpfU2kHkBQ1IJ7qS5O2K3ojHeOWhzRP7VXpbLC_VyHbYtph22En_-fPZjy22AxNeJOl4fO66ceXlaeDhzIXka9U=s4800-w800-h600" alt="Quinta do Lago South" onerror="this.parentElement.style.display='none'"><div class="photo-caption">Quinta do Lago South</div></div>
+          <div><img src="https://lh3.googleusercontent.com/places/ANXAkqHPyM5pT3tFjmrcfoEi0BuHJcJ_kWrLzMDj4cKY9nGQn5QN31us5hIF_UBYNwuoIGCmjxYQOjotIVHoA5O1NkJp-FWqHXa4lEo=s4800-w800-h600" alt="QdL South hole" onerror="this.parentElement.style.display='none'"><div class="photo-caption">Ria Formosa views</div></div>
+        </div>
+        <div class="course-desc-full">
+          The crown jewel of Portuguese golf. Designed in 1974 by William Mitchell, who introduced American-standard greens and bunkers to the Algarve. Hosted the Portuguese Open eight times — including Colin Montgomerie's 1989 win where he shot 63 and finished 11 strokes clear to break the world record at the time. The front nine favours a draw through parkland; the back nine loops around the Ria Formosa lakes and favours a fade. Water on holes 3, 15 and 17. Pristine conditioning, lightning-fast greens. The hardest holes are 8, 10, 15 and 18. A course that genuinely challenges every part of your game. Book first — it sells out faster than any other course in the Golden Triangle.
+        </div>
+        <div class="course-right">
+          <div class="sig-hole">
+            <div class="sig-lbl">⭐ Signature Hole</div>
+            <div class="sig-title">Hole 15 — Par 3 over water</div>
+            <div class="sig-desc">A showstopper. Tee shot over water to a well-guarded green — the kind of hole you'll be recounting for weeks. Get the yardage right.</div>
+          </div>
+          <div class="sig-hole">
+            <div class="sig-lbl">Also Watch</div>
+            <div class="sig-title">Hole 18 — Par 4 closer</div>
+            <div class="sig-desc">Demands a precise approach to a well-guarded green. Great closing hole with clubhouse viewing terrace behind the green.</div>
+          </div>
+          <table class="scorecard-mini">
+            <tr><th>Hole</th><th>1–9</th><th>10–18</th><th>Total</th></tr>
+            <tr><td>Par</td><td>36</td><td>36</td><td class="sc-par">72</td></tr>
+            <tr><td>Length (m)</td><td>3,244</td><td>3,244</td><td class="sc-par">6,488</td></tr>
+            <tr><td>Water holes</td><td colspan="2">3, 15, 17</td><td></td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="ch-strip">
+        <div class="ch-strip-icon">🍽</div>
+        <div class="ch-strip-content">
+          <div class="ch-strip-lbl">Clubhouse — Quinta do Lago (shared South + North)</div>
+          <div class="ch-strip-text">Recently renovated. Proper sit-down lunch menu: Chicken Piri-Piri, Batatas Bravas, clubhouse burger, Portuguese specials. Champions Breakfast from early morning. Buggy Bar on-course for cold drinks and snacks mid-round. Great fairway terrace. Stay for a beer between rounds.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QdL NORTH -->
+    <div class="course-card">
+      <div class="course-header">
+        <div class="course-day-tab"><div class="cdn">Saturday</div><div class="cdd">PM</div></div>
+        <div class="course-hero-img">
+          <img src="https://lh3.googleusercontent.com/place-photos/AJRVUZOJDnGboGfBWp4ZA0DDwtMFCAtop9EJMPnzgmQwaTRXd-56W278r3geMse5PjRko3__bFfqU5QRdC-Artj5ovSLrm2Kj-KU-SNEV5hvCKYlospW6kOK4zZDjbky46_hVljr1Z5eT4dteCoM5wg=s4800-w800-h600" alt="Quinta do Lago North" onerror="this.parentElement.style.display='none'">
+        </div>
+        <div class="course-info">
+          <div class="course-badge-row">
+            <span class="cbadge cb-relax">Relaxed / Fun</span>
+            <span class="cbadge cb-gold">Paul McGinley Redesign 2014</span>
+            <span class="cbadge cb-gold">€9m Rebuild</span>
+          </div>
+          <div class="course-name">Quinta do Lago North</div>
+          <div class="course-arch"><span class="arch-pill">✏️ Rocky Roquemore</span> · 1986 · Rebuilt by <span class="arch-pill">✏️ Paul McGinley + Beau Welling</span> · 2014</div>
+        <div class="course-links">
+          <a href="https://www.quintadolago.com/en/golf/golf-courses-north/" target="_blank" rel="noopener" class="clink clink-official">🌐 Official Site</a>
+          <a href="https://www.leadingcourses.com/clubs/europe+portugal+algarve/quinta-do-lago" target="_blank" rel="noopener" class="clink clink-book">⛳ Tee Times · Leading Courses</a>
+        </div>
+          <div class="course-stats">
+            <div class="stat"><div class="stat-val">72</div><div class="stat-lbl">Par</div></div>
+            <div class="stat"><div class="stat-val">6,205m</div><div class="stat-lbl">Length</div></div>
+            <div class="stat"><div class="stat-val">71.0</div><div class="stat-lbl">CR</div></div>
+            <div class="stat"><div class="stat-val">133</div><div class="stat-lbl">Slope</div></div>
+            <div class="stat"><div class="stat-val lc-rating">8.6<span style="font-size:10px">/10</span></div><div class="stat-lbl">Leading Courses</div></div>
+            <div class="stat"><div class="stat-val">0 min</div><div class="stat-lbl">From South</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="course-body">
+        <div class="photo-gallery">
+          <div><img src="https://lh3.googleusercontent.com/place-photos/AJRVUZOJDnGboGfBWp4ZA0DDwtMFCAtop9EJMPnzgmQwaTRXd-56W278r3geMse5PjRko3__bFfqU5QRdC-Artj5ovSLrm2Kj-KU-SNEV5hvCKYlospW6kOK4zZDjbky46_hVljr1Z5eT4dteCoM5wg=s4800-w800-h600" alt="Quinta do Lago North" onerror="this.parentElement.style.display='none'"><div class="photo-caption">QdL North — McGinley redesign</div></div>
+          <div><img src="https://lh3.googleusercontent.com/place-photos/AJRVUZNYt6Ifn7chdmrGSg31RQQaNlbM3m8l-jiCNy7gUmnx3OjjS6OpEXT2Pz-EiHjzYOl_5z94q_Y90GJroCudodI0znptpS6FEArUoxmM-67whCPpanHbtqrbvMQ977IvVnbO5ZGIcWBVlWtkmg=s4800-w800-h600" alt="QdL North fairway" onerror="this.parentElement.style.display='none'"><div class="photo-caption">Fairway views</div></div>
+        </div>
+        <div class="course-desc-full">
+          After a €9 million redesign by Ryder Cup captain Paul McGinley in 2014, the North has emerged as a genuine rival to the South — all tees, greens and bunkers completely rebuilt. More open and playable than its neighbour, but with crafty bunkers and water challenges that keep you honest. The routing is interesting and varied. Buggy bar on course. Being on the same estate as the South means zero driving between rounds on Saturday — just walk to the first tee of the North after lunch. Currently holds the highest Google rating of the Quinta do Lago trio at 4.7★.
+        </div>
+        <div class="course-right">
+          <div class="sig-hole">
+            <div class="sig-lbl">⭐ Signature Hole</div>
+            <div class="sig-title">Hole 2 — Par 3 over water</div>
+            <div class="sig-desc">A very tough opening par-3. Tee shot carries water to a demanding green. Sets the tone for what the North expects of you.</div>
+          </div>
+          <div class="sig-hole">
+            <div class="sig-lbl">Strategy Note</div>
+            <div class="sig-title">Front 9 favours draw · Back 9 fade</div>
+            <div class="sig-desc">Same as the South — the routing rewards players who can work the ball both ways. Think before you swing on the back nine.</div>
+          </div>
+          <table class="scorecard-mini">
+            <tr><th>Hole</th><th>1–9</th><th>10–18</th><th>Total</th></tr>
+            <tr><td>Par</td><td>36</td><td>36</td><td class="sc-par">72</td></tr>
+            <tr><td>Length (m)</td><td>~3,000</td><td>~3,205</td><td class="sc-par">6,205</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="ch-strip">
+        <div class="ch-strip-icon">🍺</div>
+        <div class="ch-strip-content">
+          <div class="ch-strip-lbl">Same Clubhouse as South — use it again</div>
+          <div class="ch-strip-text">Grab a cold Sagres on the terrace, recap Saturday's scorecards, settle the skins. The North and South share the same renovated clubhouse — it's the best 19th hole setup in the Golden Triangle.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VdL ROYAL -->
+    <div class="course-card">
+      <div class="course-header">
+        <div class="course-day-tab" style="background:#1e3a0a;"><div class="cdn">Sunday</div><div class="cdd">AM</div></div>
+        <div class="course-hero-img">
+          <img src="https://lh3.googleusercontent.com/place-photos/AJRVUZNWy8LnlbMT-Do-J4g4oKABeqoP_k1cB0iQAwQUBO8F18VC153MxgOdhUf9_EnxNxjYxi9t_pxTvOQPJ-JLMqm9DIk8k7pTa3fm9jdy9Npcv1NLgZ75IxbXcNEwvW8ShUCfvHFwJAnY2PL6Gw=s4800-w800-h600" alt="Vale do Lobo Royal" onerror="this.parentElement.style.display='none'">
+        </div>
+        <div class="course-info">
+          <div class="course-badge-row">
+            <span class="cbadge cb-prem">Premium</span>
+            <span class="cbadge cb-gold">Top 100 Europe</span>
+            <span class="cbadge cb-gold">Most Photographed Hole in Portugal</span>
+          </div>
+          <div class="course-name">Vale do Lobo Royal</div>
+          <div class="course-arch"><span class="arch-pill">✏️ Sir Henry Cotton</span> · Original · Redesigned by <span class="arch-pill">✏️ Rocky Roquemore</span> · 1997</div>
+        <div class="course-links">
+          <a href="https://www.valedolobo.com/en/golf-experience-algarve/the-courses/royal-golf-course/" target="_blank" rel="noopener" class="clink clink-official">🌐 Official Site</a>
+          <a href="https://www.leadingcourses.com/clubs/europe+portugal+algarve/vale-do-lobo" target="_blank" rel="noopener" class="clink clink-book">⛳ Tee Times · Leading Courses</a>
+        </div>
+          <div class="course-stats">
+            <div class="stat"><div class="stat-val">72</div><div class="stat-lbl">Par</div></div>
+            <div class="stat"><div class="stat-val">6,059m</div><div class="stat-lbl">Length</div></div>
+            <div class="stat"><div class="stat-val">72.7</div><div class="stat-lbl">CR</div></div>
+            <div class="stat"><div class="stat-val">133</div><div class="stat-lbl">Slope</div></div>
+            <div class="stat"><div class="stat-val lc-rating">8.3<span style="font-size:10px">/10</span></div><div class="stat-lbl">Leading Courses</div></div>
+            <div class="stat"><div class="stat-val">~14 min</div><div class="stat-lbl">From Villa</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="course-body">
+        <div class="photo-gallery">
+          <div><img src="https://lh3.googleusercontent.com/place-photos/AJRVUZNWy8LnlbMT-Do-J4g4oKABeqoP_k1cB0iQAwQUBO8F18VC153MxgOdhUf9_EnxNxjYxi9t_pxTvOQPJ-JLMqm9DIk8k7pTa3fm9jdy9Npcv1NLgZ75IxbXcNEwvW8ShUCfvHFwJAnY2PL6Gw=s4800-w800-h600" alt="Vale do Lobo Royal" onerror="this.parentElement.style.display='none'"><div class="photo-caption">VdL Royal — clifftop views</div></div>
+          <div><img src="https://lh3.googleusercontent.com/place-photos/AJRVUZMKl_S6b_8Vf1BPB51sd_lT97OR9eD4IZL2WQ3eQMR5q-NjTDrZB2X1bBVqToJbvPG6zpBSnIw0_IZVUmvOk0yO4PNDoEbnyDNDEBM6qUCWYe_y3CdNVWJn2wblsP2lkCG9vXHtEEa1ZAUINA=s4800-w800-h600" alt="VdL Royal hole 16" onerror="this.parentElement.style.display='none'"><div class="photo-caption">The famous 16th</div></div>
+        </div>
+        <div class="course-desc-full">
+          One of the most recognisable courses in all of Europe. The Royal mixes nine of Henry Cotton's original holes with nine redesigned by Rocky Roquemore in the 1990s. Rolling fairways set among umbrella pines, beautiful lakes, and wild flowers — and then the 16th. The course has hosted the Open de Portugal in 2002 and 2003. Handicap certificate required (Men max 24). Steepish climbs on the back nine — buggy recommended. The almost-island green of the 9th is another highlight before the famous finale. Spike's restaurant at the clubhouse is one of the best golf terrace setups in the Algarve.
+        </div>
+        <div class="course-right">
+          <div class="sig-hole">
+            <div class="sig-lbl">⭐ THE Signature Hole — Bucket List</div>
+            <div class="sig-title">Hole 16 — Par 3 · 224 yards (back tees)</div>
+            <div class="sig-desc">A clifftop par-3 with a full carry over a dramatic ravine to a green more than 200 yards away. The most photographed hole in Portugal. Into the wind it is one of the most daunting shots in European golf. Take a photo before you swing.</div>
+          </div>
+          <div class="sig-hole">
+            <div class="sig-lbl">Also Watch</div>
+            <div class="sig-title">Hole 9 — Almost Island Green</div>
+            <div class="sig-desc">A scenic par-3 almost entirely surrounded by water. Tee shot must land softly. Green is saucer-shaped and hard to judge. No bailout.</div>
+          </div>
+          <table class="scorecard-mini">
+            <tr><th>Tees</th><th>Par</th><th>Length</th><th>Rating</th><th>Slope</th></tr>
+            <tr><td>Championship</td><td>72</td><td>6,059m</td><td>72.7</td><td>133</td></tr>
+            <tr><td>Mens</td><td>72</td><td>5,677m</td><td>70.7</td><td>129</td></tr>
+            <tr><td>Ladies</td><td>72</td><td>4,909m</td><td>71.6</td><td>129</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="ch-strip">
+        <div class="ch-strip-icon">🍽</div>
+        <div class="ch-strip-content">
+          <div class="ch-strip-lbl">Spike's Restaurant — Vale do Lobo Clubhouse</div>
+          <div class="ch-strip-text">Right at the clubhouse, terrace overlooks the course and pretty garden. Full menu from breakfast through late night — grills, sandwiches, cold beers, cocktails. Halfway buggy service on-course. Classic 19th hole feel. Watch others suffer on 18 while you eat.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VILA SOL -->
+    <div class="course-card">
+      <div class="course-header">
+        <div class="course-day-tab"><div class="cdn">Sunday</div><div class="cdd">PM</div></div>
+        <div class="course-hero-img">
+          <img src="https://lh3.googleusercontent.com/place-photos/AJRVUZPTgBpRvgRHZ7tbHXPAroxeubKtOaZUw-PLKdrp9rRyLDKv4OTDgCWKAMIPwzqS_YtUTA6oI26K_LUEWkPpkxJv6qxotkHxRKYrybIqsOT-itqYEDJazoHDo98etFYqJHgZ8yRueLEJte6P8PNwgA4ObA=s4800-w800-h600" alt="Vila Sol Golf" onerror="this.parentElement.style.display='none'">
+        </div>
+        <div class="course-info">
+          <div class="course-badge-row">
+            <span class="cbadge cb-relax">Relaxed / Fun</span>
+            <span class="cbadge cb-gold">27 Holes — Pick Your 18</span>
+            <span class="cbadge cb-gold">🇵🇹 Portuguese Open ×2</span>
+          </div>
+          <div class="course-name">Vila Sol Golf</div>
+          <div class="course-arch"><span class="arch-pill">✏️ Donald Steel</span> · 1991 (Prestige nine added 2000) · 27 holes</div>
+        <div class="course-links">
+          <a href="https://pestanagolf.com/golf/vila-sol/" target="_blank" rel="noopener" class="clink clink-official">🌐 Official Site</a>
+          <a href="https://www.leadingcourses.com/clubs/europe+portugal+algarve/vila-sol-golf-pestana-golf" target="_blank" rel="noopener" class="clink clink-book">⛳ Tee Times · Leading Courses</a>
+        </div>
+          <div class="course-stats">
+            <div class="stat"><div class="stat-val">72</div><div class="stat-lbl">Par (18)</div></div>
+            <div class="stat"><div class="stat-val">6,061m</div><div class="stat-lbl">Length</div></div>
+            <div class="stat"><div class="stat-val">71.5</div><div class="stat-lbl">CR</div></div>
+            <div class="stat"><div class="stat-val">128</div><div class="stat-lbl">Slope</div></div>
+            <div class="stat"><div class="stat-val lc-rating">7.9<span style="font-size:10px">/10</span></div><div class="stat-lbl">Leading Courses</div></div>
+            <div class="stat"><div class="stat-val">~18 min</div><div class="stat-lbl">From VdL Royal</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="course-body">
+        <div class="photo-gallery">
+          <div><img src="https://lh3.googleusercontent.com/place-photos/AJRVUZPTgBpRvgRHZ7tbHXPAroxeubKtOaZUw-PLKdrp9rRyLDKv4OTDgCWKAMIPwzqS_YtUTA6oI26K_LUEWkPpkxJv6qxotkHxRKYrybIqsOT-itqYEDJazoHDo98etFYqJHgZ8yRueLEJte6P8PNwgA4ObA=s4800-w800-h600" alt="Vila Sol Golf" onerror="this.parentElement.style.display='none'"><div class="photo-caption">Vila Sol — valley setting</div></div>
+          <div><img src="https://lh3.googleusercontent.com/place-photos/AJRVUZPbQZSkxfDe3hVWbDJLObfzeF0Z7dTNXUHiSYjfw_nVpNWzsRlpUjcbG69MTeBCUDVUMy4XkW82KFYjSaPEr8FKvOTnAZVIGsA-q-s6txNB_tC0X66LGLim_tYkQbXEOgfpHB4c8E_k3DlvcQ=s4800-w800-h600" alt="Vila Sol fairway" onerror="this.parentElement.style.display='none'"><div class="photo-caption">Pine-lined fairways</div></div>
+        </div>
+        <div class="course-desc-full">
+          27 holes across three nines — Prime, Challenge and Prestige — naturally sculpted through a valley landscape. You pick which two nines to play depending on mood and energy. Set on 150 hectares with diverse flora and fauna, the routing feels natural and unhurried. Twice hosted the Portuguese Open. Has an excellent grassed Academy for anyone wanting a quick lesson. At Sunday afternoon prices it's excellent value and the perfect wind-down round after the Royal's intensity in the morning. Good green speed (around 10 on stimpmeter) and well-maintained fairways.
+        </div>
+        <div class="course-right">
+          <div class="sig-hole">
+            <div class="sig-lbl">⭐ Strategy Note</div>
+            <div class="sig-title">Pick Prime + Challenge for the best 18</div>
+            <div class="sig-desc">The Prime nine is the most scenic. Challenge offers the tightest holes. Prestige is the most open. Mix based on the group's mood after a long Sunday of golf.</div>
+          </div>
+          <div class="sig-hole">
+            <div class="sig-lbl">Watch Out</div>
+            <div class="sig-title">Opening 3 holes — Par 3 cluster</div>
+            <div class="sig-desc">The first three holes are tricky par-3s. Get through them cleanly and the course opens up nicely. Don't let them wreck your scorecard early.</div>
+          </div>
+          <table class="scorecard-mini">
+            <tr><th>Nine</th><th>Par</th><th>Length</th><th>Character</th></tr>
+            <tr><td>Prime</td><td>36</td><td>~2,000m</td><td>Most scenic</td></tr>
+            <tr><td>Challenge</td><td>36</td><td>~2,000m</td><td>Tightest</td></tr>
+            <tr><td>Prestige</td><td>36</td><td>~2,061m</td><td>Most open</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="ch-strip">
+        <div class="ch-strip-icon">🍺</div>
+        <div class="ch-strip-content">
+          <div class="ch-strip-lbl">Vila Sol Clubhouse Terrace</div>
+          <div class="ch-strip-text">Good food and drink at excellent prices compared to other Algarve courses. Valley views from the terrace. Relaxed atmosphere. Great spot for Sunday end-of-day drinks and scorecard debate before heading to dinner at A Quinta.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- OLD COURSE -->
+    <div class="course-card">
+      <div class="course-header">
+        <div class="course-day-tab" style="background:#1e3a0a;"><div class="cdn">Monday</div><div class="cdd">AM</div></div>
+        <div class="course-hero-img">
+          <img src="https://lh3.googleusercontent.com/places/ANXAkqHE1OFxDmAwGBXn_Ibk2iSB2kguV_JAnr0kQlWesI-phSHNY939prQiXIc_--hXGpXOU3q-6K1_QTWz_ve5kyEBQNRWUxXCxZ8=s4800-w800-h600" alt="Dom Pedro Old Course" onerror="this.parentElement.style.display='none'">
+        </div>
+        <div class="course-info">
+          <div class="course-badge-row">
+            <span class="cbadge cb-prem">Classic</span>
+            <span class="cbadge cb-gold">1969 — Oldest in Vilamoura</span>
+            <span class="cbadge cb-gold">Grande Dame of the Algarve</span>
+          </div>
+          <div class="course-name">Dom Pedro Old Course</div>
+          <div class="course-arch"><span class="arch-pill">✏️ Frank Pennink</span> · 1969 · Updated <span class="arch-pill">✏️ Martin Hawtree</span> · 1996 · GEO Certified</div>
+        <div class="course-links">
+          <a href="https://www.oldcoursevilamoura.com/" target="_blank" rel="noopener" class="clink clink-official">🌐 Official Site</a>
+          <a href="https://www.leadingcourses.com/clubs/europe+portugal+algarve/old-course-vilamoura" target="_blank" rel="noopener" class="clink clink-book">⛳ Tee Times · Leading Courses</a>
+        </div>
+          <div class="course-stats">
+            <div class="stat"><div class="stat-val">73</div><div class="stat-lbl">Par</div></div>
+            <div class="stat"><div class="stat-val">6,254m</div><div class="stat-lbl">Length</div></div>
+            <div class="stat"><div class="stat-val">73.1</div><div class="stat-lbl">CR</div></div>
+            <div class="stat"><div class="stat-val">136</div><div class="stat-lbl">Slope</div></div>
+            <div class="stat"><div class="stat-val lc-rating" style="color:var(--gold)">🏆</div><div class="stat-lbl">PT Best 2025</div></div>
+            <div class="stat"><div class="stat-val">15 min→FAO</div><div class="stat-lbl">Airport after</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="course-body">
+        <div class="photo-gallery">
+          <div><img src="https://lh3.googleusercontent.com/places/ANXAkqHE1OFxDmAwGBXn_Ibk2iSB2kguV_JAnr0kQlWesI-phSHNY939prQiXIc_--hXGpXOU3q-6K1_QTWz_ve5kyEBQNRWUxXCxZ8=s4800-w800-h600" alt="Old Course Vilamoura" onerror="this.parentElement.style.display='none'"><div class="photo-caption">Old Course — Grande Dame</div></div>
+          <div><img src="https://lh3.googleusercontent.com/place-photos/AJRVUZMUSeNI5U4wXYg0yjZV7WkCtbUrp8fAiD9JhPGIsZDaAOJGpRpYUDlZDV52vAU6tjpFC7q5Pd4ec2-hOc-VxjRwM7uL-igtxivYnsvU0k_4IErDX394JRx9ggLkTG4V-mbvvfwyx3E4Ftr_Iw=s4800-w800-h600" alt="Old Course fairway" onerror="this.parentElement.style.display='none'"><div class="photo-caption">Umbrella pine fairways · 1969</div></div>
+        </div>
+        <div class="course-desc-full">
+          The second oldest course in the Algarve and one of the most respected layouts in all of Portugal. Frank Pennink's 1969 design through the Vilamoura umbrella pines is a pure parkland test of accuracy and ball-striking — no gimmicks, just golf. The layout rewards clean hitting from the tee and precise iron play. Several doglegs on the back nine keep you thinking. Martin Hawtree's 1996 update improved the flow without changing the character. Hosted the Portugal Open on the European Tour. One of the highest Google ratings of any course in the Algarve at 4.6★ from 564 reviews. The perfect send-off round — satisfying, classic, memorable.
+        </div>
+        <div class="course-right">
+          <div class="sig-hole">
+            <div class="sig-lbl">⭐ Signature Hole</div>
+            <div class="sig-title">Hole 4 — Par 3 over water</div>
+            <div class="sig-desc">The only water hole on the course, and it bites. The front nine's only real drama — get it right and the back nine opens up beautifully.</div>
+          </div>
+          <div class="sig-hole">
+            <div class="sig-lbl">Also Watch</div>
+            <div class="sig-title">Hole 1 — Short par-4 opener</div>
+            <div class="sig-desc">Risk and reward off the first tee. A perfect scene-setter that tells you immediately what kind of round this course will demand.</div>
+          </div>
+          <table class="scorecard-mini">
+            <tr><th>Tees</th><th>Par</th><th>Length</th><th>Rating</th><th>Slope</th></tr>
+            <tr><td>White</td><td>73</td><td>6,354m</td><td>73.1</td><td>136</td></tr>
+            <tr><td>Yellow</td><td>73</td><td>5,913m</td><td>71.4</td><td>133</td></tr>
+            <tr><td>Blue (L)</td><td>73</td><td>5,718m</td><td>70.0</td><td>113</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="ch-strip">
+        <div class="ch-strip-icon">🍽</div>
+        <div class="ch-strip-content">
+          <div class="ch-strip-lbl">Old Course Restaurant — Departure Lunch</div>
+          <div class="ch-strip-text">Gastropub-inspired menu overlooks the historic layout. Portuguese specials, good wine list, fresh produce. The team runs regular Wine & Dine and Jazzy Bites events. Proper sit-down departure lunch — enjoy it, then straight onto the motorway to Faro airport in 15 minutes.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══ ITINERARY ═══ -->
+  <div id="itin" class="tc">
+    <div class="slabel">The Group</div>
+    <div class="ic" style="margin-bottom:14px;">
+      <div style="display:flex;flex-wrap:wrap;gap:3px;align-items:center;margin-bottom:10px;">
+        <span class="gpill"><span class="gpn">You</span><span class="gpf">Vinaròs · BCN → FAO</span></span>
+        <span class="gpill"><span class="gpn">Eddy</span><span class="gpf">Barcelona · BCN → FAO</span></span>
+        <span class="gpill"><span class="gpn">Sascha</span><span class="gpf">Berlin · BER → FAO</span></span>
+        <span class="gpill"><span class="gpn">+1 Guest</span><span class="gpf">Berlin · BER → FAO</span></span>
+      </div>
+      <div style="font-size:13px;color:var(--muted);line-height:1.55;">Coordinate arrivals so everyone is at the villa by 14:30–15:00 Friday. BCN→FAO is ~1h20, BER→FAO is ~3h15. Aim for both groups landing early-mid afternoon.</div>
+    </div>
+
+    <div class="slabel">Day by Day</div>
+
+    <div class="dc">
+      <div class="dh" onclick="toggleDay(this)">
+        <div class="dtab"><div class="dname">Friday</div><div class="ddate">9 Oct</div></div>
+        <div class="dta"><div class="dtitle">Arrive · Drop Bags · First Round</div><div class="dsub">1 relaxed round · Petiscos dinner</div></div>
+        <div class="dtog">▾</div>
+      </div>
+      <div class="db open">
+        <div class="rnd"><div class="rs relax"></div><div>
+          <div class="rt">~15:30 TEE TIME</div>
+          <div class="rn">Dom Pedro Pinhal</div>
+          <div class="ra">Pennink / RTJ Sr. · Par 72 · Rating 74.0 · Slope 140</div>
+          <div class="rd">Pine-forest opener. No pressure, good pace, shake off the flights. GPS buggies, cold beers at the halfway house. Finish at dusk, drive into Vilamoura for dinner.</div>
+          <div class="brow"><span class="b br">Relaxed</span><span class="b bo">~12 min from villa</span><span class="b bg">~€80–100pp</span></div>
+        </div></div>
+        <div class="ch"><div class="chl">🍺 19th Hole — Pinhal Terrace</div><div class="chd">Cold Sagres on the panoramic terrace. Simple and solid. Then drive to Vilamoura marina area for dinner.</div></div>
+        <div class="eve"><div class="evel">🍷 Friday Dinner</div><div class="even">Social Vinhos & Petiscos — Vilamoura</div><div class="eved">Portuguese petiscos and regional wines. Rustic, relaxed, lively. Walk the marina after. The no-stress trip opener.</div></div>
+      </div>
+    </div>
+
+    <div class="dc">
+      <div class="dh" onclick="toggleDay(this)">
+        <div class="dtab"><div class="dname">Saturday</div><div class="ddate">10 Oct</div></div>
+        <div class="dta"><div class="dtitle">The Big Day</div><div class="dsub">Premium AM · Relaxed PM · Monica's dinner</div></div>
+        <div class="dtog">▾</div>
+      </div>
+      <div class="db open">
+        <div class="rnd"><div class="rs"></div><div>
+          <div class="rt">08:30 TEE TIME — PREMIUM</div>
+          <div class="rn">Quinta do Lago South</div>
+          <div class="ra">Mitchell 1974 · Par 72 · Rating 73.5 · Slope 127 · 8× Portuguese Open</div>
+          <div class="rd">The flagship. Colin Montgomerie shot 63 here. Fast greens, championship conditioning, spectacular closing holes around the Ria Formosa lakes. Book first, fills fast.</div>
+          <div class="brow"><span class="b bg">Championship</span><span class="b bo">~10 min from villa</span><span class="b bg">~€130–170pp</span></div>
+        </div></div>
+        <div class="ch"><div class="chl">🍽 Clubhouse Lunch — Quinta do Lago</div><div class="chd">Full lunch at the renovated QdL clubhouse. Piri-Piri chicken, burgers, Portuguese specials. Buggy bar on-course mid-round. Stay and eat properly between rounds — you're on the same estate.</div></div>
+        <div class="dot">· · ·</div>
+        <div class="rnd"><div class="rs relax"></div><div>
+          <div class="rt">14:30 TEE TIME — RELAXED</div>
+          <div class="rn">Quinta do Lago North</div>
+          <div class="ra">McGinley redesign 2014 · Par 72 · €9m rebuild · LC 8.6/10</div>
+          <div class="rd">Zero travel — same estate. Open, playable, beautifully conditioned. Great afternoon wind-down round. Settle the morning's skins on the back nine.</div>
+          <div class="brow"><span class="b br">Relaxed</span><span class="b bo">0 min from South</span><span class="b bg">~€110–140pp</span></div>
+        </div></div>
+        <div class="ch"><div class="chl">🍺 Post-Round — QdL Terrace</div><div class="chd">Cold drink on the clubhouse terrace. Best 19th hole setup in the Golden Triangle. Recap the day.</div></div>
+        <div class="eve"><div class="evel">🥩 Saturday Dinner — Best of the Trip</div><div class="even">Monica's Restaurant — Vale do Lobo</div><div class="eved">Rustic outdoor setting. Owner Luis on the floor. Famous turbot and fillet steak. Zero pretension, exceptional quality. Book ahead.</div></div>
+      </div>
+    </div>
+
+    <div class="dc">
+      <div class="dh" onclick="toggleDay(this)">
+        <div class="dtab"><div class="dname">Sunday</div><div class="ddate">11 Oct</div></div>
+        <div class="dta"><div class="dtitle">Clifftop Golf & Steak Night</div><div class="dsub">Top 100 Europe AM · Fun 27-hole PM · A Quinta dinner</div></div>
+        <div class="dtog">▾</div>
+      </div>
+      <div class="db open">
+        <div class="rnd"><div class="rs"></div><div>
+          <div class="rt">08:48 TEE TIME — PREMIUM</div>
+          <div class="rn">Vale do Lobo Royal</div>
+          <div class="ra">Cotton/Roquemore · Par 72 · Rating 72.7 · Slope 133 · Top 100 Europe</div>
+          <div class="rd">The iconic one. Hole 16 — par-3 over a clifftop, 224 yards, Atlantic below. Most photographed hole in Portugal. Hole 9 almost-island green. Rolling pines and lakes throughout.</div>
+          <div class="brow"><span class="b bg">Top 100 EU</span><span class="b bo">~14 min from villa</span><span class="b bg">~€160pp</span></div>
+        </div></div>
+        <div class="ch"><div class="chl">🍽 Spike's — Vale do Lobo Clubhouse</div><div class="chd">Terrace overlooking the course. Grills, sandwiches, cold beers. Halfway buggy on course. Sit and watch others on 18 while you eat lunch.</div></div>
+        <div class="dot">· · ·</div>
+        <div class="rnd"><div class="rs relax"></div><div>
+          <div class="rt">14:30 TEE TIME — RELAXED</div>
+          <div class="rn">Vila Sol Golf</div>
+          <div class="ra">Donald Steel · 27 holes · Pick your 18 · LC 7.9/10</div>
+          <div class="rd">Choose two of three nines. Valley-sculpted, unhurried pace. Great value, good greens. A proper wind-down after the Royal's intensity.</div>
+          <div class="brow"><span class="b br">Relaxed / Fun</span><span class="b bo">~18 min from VdL</span><span class="b bg">~€80–100pp</span></div>
+        </div></div>
+        <div class="ch"><div class="chl">🍺 Vila Sol Terrace</div><div class="chd">Great value drinks, valley views. Settle Sunday's skins before dinner. Best-priced post-round drinks in the area.</div></div>
+        <div class="eve"><div class="evel">🌿 Sunday Dinner</div><div class="even">A Quinta — Almancil hillside</div><div class="eved">Terrace on a hill outside Almancil with sweeping Algarve views. Famous for duck confit, prime steaks, creative salads. Locals' favourite for 30+ years. Book a terrace table. Order the espresso martini.</div></div>
+      </div>
+    </div>
+
+    <div class="dc">
+      <div class="dh" onclick="toggleDay(this)">
+        <div class="dtab"><div class="dname">Monday</div><div class="ddate">12 Oct</div></div>
+        <div class="dta"><div class="dtitle">Departure Round</div><div class="dsub">1 classic round · Proper lunch · Airport</div></div>
+        <div class="dtog">▾</div>
+      </div>
+      <div class="db open">
+        <div class="rnd"><div class="rs"></div><div>
+          <div class="rt">08:00 TEE TIME</div>
+          <div class="rn">Dom Pedro Old Course</div>
+          <div class="ra">Pennink 1969 · Hawtree 1996 · Par 73 · Rating 73.1 · Slope 136 · 4.6★ Google</div>
+          <div class="rd">The Grande Dame of Algarve golf. Precision pine-forest parkland. Hole 4 par-3 over water is the only real drama. Finish by 12:30, proper lunch, 15 min to FAO. The perfect farewell round.</div>
+          <div class="brow"><span class="b bg">Classic / Iconic</span><span class="b bo">15 min to FAO</span><span class="b bg">~€90–120pp</span></div>
+        </div></div>
+        <div class="ch"><div class="chl">🍽 Old Course Restaurant — Departure Lunch</div><div class="chd">Gastropub menu overlooking the historic layout. Portuguese specials, good wine list. Proper send-off lunch — then straight motorway to Faro airport.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ VILLA ═══ -->
+  <div id="villa" class="tc">
+    <div class="slabel">The Base</div>
+    <div class="vc">
+      <div class="vt">Villa in Almancil — Pool & Golf Green</div>
+      <div class="vs">Ria Formosa National Park · 4 Acres · Dead Centre Golden Triangle</div>
+      <div class="vf">
+        <span class="vfi hi">⛳ 3-Hole Putting + Chipping Green</span>
+        <span class="vfi hi">🏊 Large Private Pool</span>
+        <span class="vfi hi">🎾 Acrylic Tennis Court</span>
+        <span class="vfi hi">🏌️ Full Practice Net (irons + woods)</span>
+        <span class="vfi">4 Bedrooms</span>
+        <span class="vfi">4 Acres Gardens</span>
+        <span class="vfi">National Park Setting</span>
+        <span class="vfi">Open Fire</span>
+        <span class="vfi">Pine Beam Ceilings</span>
+        <span class="vfi">Orchard</span>
+      </div>
+      <div class="vd">Traditional 4-bedroom Algarvian villa in 4 acres of mature gardens within Ria Formosa National Park. The 3-hole putting and chipping green with Huxley Rotanet practice net is genuinely usable — morning warm-ups, evening putting competitions over a cold beer. Large pool patio, outdoor dining, open fire for October evenings. Quinta do Lago South is 4 min away. Vale do Lobo is 10 min. This is a proper base, not just a bed.</div>
+      
+      <div class="course-links" style="margin-top:16px;">
+        <a href="https://www.vrbo.com/en-gb/p84414" target="_blank" rel="noopener" class="clink clink-villa" style="background:rgba(201,168,76,.15);border:1px solid var(--gold);font-size:9px;padding:7px 14px;">⭐ Villa Jesuina — View on VRBO · 9.4/10 · 36 reviews</a>
+        <a href="https://www.airbnb.com/s/Almancil--Portugal/homes?amenities%5B%5D=7&amenities%5B%5D=58" target="_blank" rel="noopener" class="clink clink-villa">🔍 Browse more — Airbnb Almancil</a>
+      </div>
+      <div class="vp">
+        <div><div class="vpv">~€300–450 / night</div><div class="vpn">Est. €900–1,350 total · ÷4 = ~€225–340pp</div></div>
+        <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;color:rgba(245,239,230,.4);text-transform:uppercase;">Search: Airbnb · VRBO · Expedia<br>"Almancil villa pool golf green"</div>
+      </div>
+    </div>
+    <div class="slabel">Alternatives if Booked</div>
+    <div class="g2">
+      <div class="ic"><div class="it">Alternative A</div><div class="in">Villa Cielo — Quinta do Lago</div><div class="id">4 en-suite beds, heated pool, rooftop jacuzzi + fire pit, outdoor kitchen. Resort feel, slightly higher price.</div></div>
+      <div class="ic"><div class="it">Alternative B</div><div class="in">Casa Dango — Almancil</div><div class="id">4-bed renovated villa, minutes from both resorts. Private heated pool, gated, good value, excellent position.</div></div>
+    </div>
+  </div>
+
+  <!-- ═══ FOOD ═══ -->
+  <div id="food" class="tc">
+    <div class="slabel">Evening Dinners</div>
+    <div class="g2">
+      <div class="ic"><div class="it">🍷 Friday Night</div><div class="in">Social Vinhos & Petiscos</div><div class="id">Vilamoura. Portuguese petiscos and wines. Relaxed, rustic, no booking needed. Walk the marina after. Easy opener.</div></div>
+      <div class="ic"><div class="it">🥩 Saturday — Main Event</div><div class="in">Monica's Restaurant</div><div class="id">Near Vale do Lobo entrance. Owner Luis runs the floor. Turbot, fillet steak, exceptional service. Outdoor rustic setting. Book ahead — small restaurant, fills fast.</div></div>
+      <div class="ic"><div class="it">🌿 Sunday — Local Favourite</div><div class="in">A Quinta — Almancil hills</div><div class="id">Hillside terrace, sweeping views. Duck confit, prime steaks, creative salads. Locals' institution for decades. Ask for terrace table. Order the espresso martini.</div></div>
+      <div class="ic"><div class="it">🌅 Backup / Alternative</div><div class="in">Parrilla Natural — Almancil</div><div class="id">Uruguayan steakhouse, illuminated pine tree, great atmosphere. Superb beef al fresco. If Monica's is full.</div></div>
+    </div>
+    <div class="slabel">Bonus Lunch Option</div>
+    <div class="ic" style="margin-bottom:14px;">
+      <div class="it">🐟 2 Passos — Praia do Ancão (Saturday between rounds if timing works)</div>
+      <div class="in">Best fresh fish in the Golden Triangle</div>
+      <div class="id" style="font-size:14px;line-height:1.65;">Beach restaurant on stilts in the Ria Formosa dunes. 30+ year institution. Famous for tiger prawns, sea bass in salt crust, grilled squid. Rooftop bar for sundowners. Book ahead. Only works Saturday if you can squeeze it between Quinta do Lago rounds — or save it for a relaxed Sunday lunch alternative.</div>
+    </div>
+    <div class="slabel">Breakfast</div>
+    <div class="ic"><div class="id" style="font-size:14px;line-height:1.65;">Use the villa. Make coffee and eggs, pack the cool box. On the drive to the first tee, stop at a pastelaria in Almancil for <strong>pastéis de nata</strong> and a <em>bica</em> (espresso). About €2 per person. That's how Portugal starts a golf morning.</div></div>
+  </div>
+
+  <!-- ═══ COSTS ═══ -->
+  <div id="costs" class="tc">
+    <div class="slabel">Travel</div>
+    <div class="ts">
+      <div class="ti"><div class="til">BCN group</div><div class="tiv">BCN → FAO</div><div class="tis">You + Eddy · ~1h 20min</div></div>
+      <div class="ta">→</div>
+      <div class="ti"><div class="til">BER group</div><div class="tiv">BER → FAO</div><div class="tis">Sascha + 1 · ~3h 15min</div></div>
+      <div class="ta">→</div>
+      <div class="ti"><div class="til">Meet at</div><div class="tiv">Faro Airport</div><div class="tis">Coordinate within ~2hrs</div></div>
+      <div class="ti"><div class="til">Car</div><div class="tiv">1× 5-seater</div><div class="tis">Rent at FAO</div></div>
+    </div>
+    <div class="slabel">Budget — Per Person</div>
+    <div class="dc" style="overflow:auto;">
+      <table class="tbl">
+        <thead><tr><th>Item</th><th>Total (4 pax)</th><th>Per Person</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Flights return</td><td>~€480–800</td><td>~€120–200</td><td>BCN/BER–FAO. Book early Oct deals.</td></tr>
+          <tr><td>Villa (3 nights)</td><td>~€900–1,350</td><td>~€225–340</td><td>4-bed Almancil villa with pool + green.</td></tr>
+          <tr><td>Rental car (4 days)</td><td>~€160–240</td><td>~€40–60</td><td>1× 5-seater from FAO.</td></tr>
+          <tr><td>Green fees (5 rounds)</td><td>—</td><td>~€570–650</td><td>Fri 1 + Sat 2 + Sun 2 + Mon 1.</td></tr>
+          <tr><td>Clubhouse food (all days)</td><td>—</td><td>~€80–120</td><td>Lunches, halfway snacks, drinks.</td></tr>
+          <tr><td>3 evening dinners</td><td>~€600–900</td><td>~€150–225</td><td>Monica's + A Quinta + Petiscos.</td></tr>
+          <tr><td>Misc (breakfasts, coffees, drinks)</td><td>~€200–300</td><td>~€50–75</td><td>Villa breakfasts + pastelaria + evening beers.</td></tr>
+          <tr style="background:rgba(45,80,22,.05)"><td><strong>Total estimate</strong></td><td>—</td><td><strong style="color:var(--green);font-size:16px;">~€1,235–1,670pp</strong></td><td>✅ Well under €2k budget</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="slabel">Book in This Order</div>
+    <div class="g2">
+      <div class="ic"><div class="it">1 — Book Now</div><div class="in">Quinta do Lago South</div><div class="id">Sells out fastest. Lock in Saturday 08:30 first — everything else follows.</div></div>
+      <div class="ic"><div class="it">2 — Book Now</div><div class="in">Villa (Airbnb/VRBO)</div><div class="id">The 4-bed Almancil golf green villa. Good October villas go fast.</div></div>
+      <div class="ic"><div class="it">3</div><div class="in">Monica's Restaurant</div><div class="id">Small restaurant. Reserve Saturday dinner as soon as dates confirmed.</div></div>
+      <div class="ic"><div class="it">4</div><div class="in">Vale do Lobo Royal</div><div class="id">Sunday AM slot. Easier than QdL South but still worth locking in.</div></div>
+      <div class="ic"><div class="it">5</div><div class="in">Flights</div><div class="id">Coordinate BCN + BER arrivals. Aim for both groups landing by 14:00 Friday.</div></div>
+      <div class="ic"><div class="it">6</div><div class="in">A Quinta — Sunday dinner</div><div class="id">Reserve a terrace table for 4. Fills up with locals in October.</div></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function toggleDay(h){
+  const b=h.nextElementSibling;
+  const t=h.querySelector('.dtog');
+  const open=b.classList.contains('open');
+  b.classList.toggle('open',!open);
+  t.classList.toggle('open',!open);
+}
+function showTab(name,el){
+  document.querySelectorAll('.tc').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.ntab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(name).classList.add('active');
+  el.classList.add('active');
+}
+</script>
+</body>
+</html>
